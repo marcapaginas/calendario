@@ -16,23 +16,31 @@ class FullCalenderController extends Controller
      */
     public function index(Request $request)
     {
-
-        $personas = Persona::all();
-        return view('index')->with([
-            'personas' => $personas
-        ]);
+        return view('index');
     }
 
     public function listarEventos(Request $request)
     {
-
         $data = Evento::whereDate('start', '>=', $request->start)
             ->whereDate('end', '<=', $request->end)
             ->leftJoin('personas', 'eventos.persona_id', '=', 'personas.id')
-            ->get(['eventos.id', 'eventos.title', 'personas.color', 'eventos.allDay', 'eventos.start', 'eventos.end']);
+            ->get(['eventos.id', 'eventos.title', 'personas.color', 'personas.nombre', 'eventos.allDay', 'eventos.start', 'eventos.end']);
 
+        // foreach ($data as $e) {
+        //     $e->title = $e->nombre . ' - ' . $e->title;
+        // }
 
         return response()->json($data);
+    }
+
+    public function crearEvento(Request $request, $comienzo = null, $fin = null, $todoElDia = null)
+    {
+        return "hola crear evento " . $comienzo;
+    }
+
+    public function actualizarEvento(Request $request, $comienzo = null, $fin = null, $todoElDia = null)
+    {
+        return "hola actualizar evento";
     }
 
     /**
@@ -44,7 +52,7 @@ class FullCalenderController extends Controller
     {
         switch ($request->type) {
             case 'add':
-                $persona = Persona::where('id', $request->persona)->first();
+                //$persona = Persona::where('id', $request->persona)->first();
                 $event = Evento::create([
                     'title' => $request->title,
                     'tipo' => $request->tipo,

@@ -19,6 +19,13 @@ Route::get('/eventos', [FullCalenderController::class, 'listarEventos']);
 Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
 Route::get('/calcular', [FullCalenderController::class, 'calcular'])->name('calcular');
 
+Route::get('/pruebamodal', function () {
+    return "hola pruebamodal";
+});
+
+Route::get('/crearEvento/{comienzo?}/{fin?}/{todoElDia?}', [FullCalenderController::class, 'crearEvento'])->name('crearEvento');
+Route::get('/actualizarEvento/{comienzo?}/{fin?}/{todoElDia?}', [FullCalenderController::class, 'actualizarEvento'])->name('actualizarEvento');
+
 Route::resource('evento', App\Http\Controllers\EventoController::class)->only('index', 'update', 'store');
 
 Route::resource('persona', App\Http\Controllers\PersonaController::class)->only('index', 'update', 'store');
