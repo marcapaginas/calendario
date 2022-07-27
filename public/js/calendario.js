@@ -436,6 +436,7 @@ function borrarPersona() {
     var deleteMsg = confirm("¿Seguro que quieres borrar esta persona?");
     if (deleteMsg) {
         window.livewire.emit("borrarPersona");
+        calendar.refetchEvents();
     }
 }
 

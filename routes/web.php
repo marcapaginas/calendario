@@ -29,3 +29,28 @@ Route::get('/actualizarEvento/{comienzo?}/{fin?}/{todoElDia?}', [FullCalenderCon
 Route::resource('evento', App\Http\Controllers\EventoController::class)->only('index', 'update', 'store');
 
 Route::resource('persona', App\Http\Controllers\PersonaController::class)->only('index', 'update', 'store');
+
+
+Route::resource('evento', App\Http\Controllers\EventoController::class)->only('index', 'update', 'store');
+
+Route::resource('persona', App\Http\Controllers\PersonaController::class)->only('index', 'update', 'store');
+
+
+Route::resource('evento', App\Http\Controllers\EventoController::class)->only('index', 'update', 'store');
+
+Route::resource('persona', App\Http\Controllers\PersonaController::class)->only('index', 'update', 'store');
+
+
+Route::resource('evento', App\Http\Controllers\EventoController::class)->only('index', 'update', 'store');
+
+Route::resource('persona', App\Http\Controllers\PersonaController::class)->only('index', 'update', 'store');
+
+
+Route::resource('evento', App\Http\Controllers\EventoController::class)->only('index', 'update', 'store');
+
+Route::resource('persona', App\Http\Controllers\PersonaController::class)->only('index', 'update', 'store');
+
+
+Route::resource('evento', App\Http\Controllers\EventoController::class)->only('index', 'update', 'store');
+
+Route::resource('persona', App\Http\Controllers\PersonaController::class)->only('index', 'update', 'store');

@@ -13,16 +13,21 @@ class CreatePersonasTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('color');
-            $table->string('diasAsuntos');
-            $table->string('diasVacaciones');
-            $table->string('diasAcumulados');
-            $table->string('diasExtra');
+            $table->string('color')->default('green');
+            $table->string('diasAsuntos')->default('1');
+            $table->string('diasVacaciones')->default('21');
+            $table->string('diasAcumulados')->default('0');
+            $table->string('diasExtra')->default('0');
+            $table->string('activo')->default('true');
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

@@ -29,6 +29,7 @@ class PersonaFactory extends Factory
             'diasVacaciones' => $this->faker->word,
             'diasAcumulados' => $this->faker->word,
             'diasExtra' => $this->faker->word,
+            'activo' => $this->faker->word,
         ];
     }
 }

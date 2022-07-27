@@ -21,6 +21,7 @@ class Persona extends Model
         'diasVacaciones',
         'diasAcumulados',
         'diasExtra',
+        'activo',
     ];
 
     /**
@@ -31,4 +32,9 @@ class Persona extends Model
     protected $casts = [
         'id' => 'integer',
     ];
+
+    public function eventos()
+    {
+        return $this->hasMany(Eventos::class);
+    }
 }

@@ -153,6 +153,7 @@ class Personas extends Component
             $this->personaDatos = null;
             $this->personas = Persona::all();
             $this->dispatchBrowserEvent('borradaPersona');
+            $this->dispatchBrowserEvent('contentChanged');
         }
     }
 

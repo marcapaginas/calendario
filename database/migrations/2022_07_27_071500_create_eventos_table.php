@@ -13,16 +13,20 @@ class CreateEventosTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
             $table->boolean('allDay');
             $table->dateTime('start');
             $table->dateTime('end');
-            $table->string('tipo')->nullable();
-            $table->unsignedBigInteger('persona_id');
+            $table->string('tipo');
+            $table->foreignId('persona_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
