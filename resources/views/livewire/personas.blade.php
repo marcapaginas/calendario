@@ -1,4 +1,4 @@
-<div class="basis-3/12 pr-3">
+<div class="w-3/12 pr-3">
     @if (!$acceso)
         <div class="w-full mr-3 h-full">
             <form class="p-3" wire:submit.prevent='checkClave'>
@@ -22,9 +22,63 @@
                         </select>
                     </div>
                     @if (!$personaDatos)
-                        <div class="p-3">
-                            <button class="w-full rounded px-3 py-2 text-white bg-gray-500 hover:bg-gray-700">CREAR
+                        <div class="p-2" x-data="{ open: false }">
+
+                            <button class="w-full rounded px-3 py-2 text-white bg-gray-500 hover:bg-gray-700"
+                                @click="open = !open">CREAR
                                 PERSONA</button>
+
+                            <div x-show="open" class="bg-white p-3 w-full" x-cloak>
+                                <form wire:submit.prevent="crearPersona">
+                                    <label for="nombre">Nombre
+                                        <input class="border rounded w-full px-2 py-1 w-full" type="text"
+                                            name="nombre" id="nombre" wire:model="nombre">
+                                        @error('nombre')
+                                            <span class="text-red-500">{{ $message }}</span><br>
+                                        @enderror
+                                    </label>
+
+                                    <label for="color">Color
+                                        <input class="w-full h-10" type="color" name="color" id="color"
+                                            wire:model="color">
+                                        @error('color')
+                                            <span class="text-red-500">{{ $message }}</span><br>
+                                        @enderror
+                                    </label>
+                                    <label for="diasVacaciones">Días Vacaciones:
+                                        <input class="border rounded px-2 py-1 w-full" type="number"
+                                            name="diasVacaciones" id="diasVacaciones" value="21"
+                                            wire:model="diasVacaciones">
+                                        @error('diasVacaciones')
+                                            <span class="text-red-500">{{ $message }}</span><br>
+                                        @enderror
+                                    </label>
+                                    <label for="diasAsuntos">Días Asuntos Propios:
+                                        <input class="border rounded px-2 py-1 w-full" type="number" name="diasAsuntos"
+                                            id="diasAsuntos" value="1" wire:model="diasAsuntos">
+                                        @error('diasAsuntos')
+                                            <span class="text-red-500">{{ $message }}</span><br>
+                                        @enderror
+                                    </label>
+                                    <label for="diasAcumulados">Días Acumulados:
+                                        <input class="border rounded px-2 py-1 w-full" type="number"
+                                            name="diasAcumulados" id="diasAcumulados" value="0"
+                                            wire:model='diasAcumulados'>
+                                        @error('diasAcumulados')
+                                            <span class="text-red-500">{{ $message }}</span><br>
+                                        @enderror
+                                    </label>
+                                    <label for="diasExtra">Días Extra:
+                                        <input class="border rounded px-2 py-1 w-full" type="number" name="diasExtra"
+                                            id="diasExtra" value="0" wire:model="diasExtra">
+                                        @error('diasExtra')
+                                            <span class="text-red-500">{{ $message }}</span><br>
+                                        @enderror
+                                    </label>
+                                    <button
+                                        class="w-full rounded bg-blue-500 hover:bg-blue-700 font-bold text-white my-2 px-3 py-2">Crear</button>
+                                </form>
+                            </div>
                         </div>
                     @endif
                 @endif
@@ -34,13 +88,13 @@
                                 class="font-bold">{{ $personaDatos->totalDias }}</span></p>
                         <p class="border-b border-gray-700 border-dashed py-2">Días Usados: <span
                                 class=" block font-bold">{{ $personaDatos->totalDiasUsados }} días
-                                @if ($personaDatos->restoHoras > 0)
+                                @if ($personaDatos->restoHoras != 0)
                                     y {{ $personaDatos->restoHoras }} horas
                                 @endif
                             </span></p>
                         <p class="py-2">Días Restantes: <span
                                 class=" block font-bold">{{ $personaDatos->diasRestantes }} días
-                                @if ($personaDatos->horasRestantes > 0)
+                                @if ($personaDatos->horasRestantes != 0)
                                     y {{ $personaDatos->horasRestantes }}
                                     horas
                                 @endif
@@ -48,8 +102,30 @@
                         <div x-data="{ open: false }">
                             <button class="w-full rounded bg-gray-500 hover:bg-gray-700 py-2 font-bold text-white"
                                 @click="open = !open">EDITAR</button>
-                            <div x-show="open" x-cloak>
-                                CONFIGURACION
+                            <div x-show="open" class="bg-white p-3 rounded" x-cloak>
+                                <label for="color">Color
+                                    <input class="w-full h-10" type="color" name="color" id="color"
+                                        wire:model="colorSeleccionado">
+                                </label>
+                                <label for="diasVacaciones">Días Vacaciones:
+                                    <input class="border rounded px-2 py-1 w-full" type="number" name="diasVacaciones"
+                                        id="diasVacaciones" wire:model="personaDatos.diasVacaciones">
+                                </label>
+                                <label for="diasAsuntos">Días Asuntos Propios:
+                                    <input class="border rounded px-2 py-1 w-full" type="number" name="diasAsuntos"
+                                        id="diasAsuntos" wire:model="personaDatos.diasAsuntos">
+                                </label>
+                                <label for="diasAcumulados">Días Acumulados:
+                                    <input class="border rounded px-2 py-1 w-full" type="number"
+                                        name="diasAcumulados" id="diasAcumulados"
+                                        wire:model="personaDatos.diasAcumulados">
+                                </label>
+                                <label for="diasExtra">Días Extra:
+                                    <input class="border rounded px-2 py-1 w-full" type="number" name="diasExtra"
+                                        id="diasExtra" wire:model="personaDatos.diasExtra">
+                                </label>
+                                <button class="bg-red-500 text-white rounded px-3 py-2"
+                                    onclick="borrarPersona()">BORRAR</button>
                             </div>
                         </div>
 

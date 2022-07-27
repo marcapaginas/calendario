@@ -341,6 +341,14 @@ window.addEventListener("cambiadaPersona", (e) => {
     }
 });
 
+window.addEventListener("creadaPersona", (e) => {
+    toastr.success("Persona creada", "Éxito");
+});
+
+window.addEventListener("borradaPersona", (e) => {
+    toastr.error("Persona borrada", "Éxito");
+});
+
 window.addEventListener("concedidoAcceso", (e) => {
     acceso = true;
     calendar.setOption("events", SITEURL + "/eventos");
@@ -422,6 +430,13 @@ function borrarEvento($id) {
         }
     }
     cerrarModal();
+}
+
+function borrarPersona() {
+    var deleteMsg = confirm("¿Seguro que quieres borrar esta persona?");
+    if (deleteMsg) {
+        window.livewire.emit("borrarPersona");
+    }
 }
 
 function cerrarModal() {
